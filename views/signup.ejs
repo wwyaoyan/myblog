@@ -1,0 +1,37 @@
+<%- include('head') %>
+
+<div class="signIn">
+    <form method="post" enctype="multipart/form-data" style="margin-top: 4rem">
+        <div class="field required head-portrait">
+            <div class="head-choose" id="result">头像选择
+            </div>
+            <input class="head-img" type="file" name="avatar" id="file_input"/>
+        </div>
+
+        <div class="signin-center" style="margin-top: 2rem">
+            <div class="signin-top signup-public">
+                <img src="/img/person.png" alt=""/>
+                <input type="text" placeholder="用户名" name="name"/>
+            </div>
+            <div class="signin-bot signup-public">
+                <img src="/img/password.png" alt=""/>
+                <input placeholder="密码" type="password" name="password"/>
+            </div>
+            <div class="signup-public">
+                <select class="ui compact selection dropdown" name="gender">
+                    <option value="m">男</option>
+                    <option value="f">女</option>
+                    <option value="x">保密</option>
+                </select>
+            </div>
+        </div>
+        <input class="go-signin" value="注册" type="submit"/>
+    </form>
+    <a href="/signin" style="color:#fff">
+        <p style="margin-top: 5rem;">
+            <span class="goRegister">已有帐号?登录>></span>
+        </p>
+    </a>
+</div>
+
+<%- include('foot') %>

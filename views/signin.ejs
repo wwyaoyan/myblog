@@ -1,0 +1,23 @@
+<%- include('head') %>
+
+<div class="signIn">
+    <form method="post">
+        <div class="signin-center">
+            <div class="signin-top">
+                <img src="/img/person.png" alt=""/>
+                <input type="text" placeholder="用户名" name="name"/>
+            </div>
+            <div class="signin-bot">
+                <img src="/img/password.png" alt=""/>
+                <input placeholder="密码" type="password" name="password"/>
+            </div>
+        </div>
+
+        <input class="go-signin" value="登录" type="submit"/>
+    </form>
+    <a href="/signup" style="color:#fff">
+        <p style="margin-top: 5rem;">
+            <span class="goRegister">没有帐号注册>></span>
+        </p>
+    </a>
+</div>

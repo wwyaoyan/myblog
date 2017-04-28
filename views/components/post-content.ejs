@@ -1,0 +1,33 @@
+<div class="post-content">
+    <div class="arthor-info">
+        <a class="avatar"
+           href="/posts?author=<%= post.author._id %>"
+           data-title="<%= post.author.name %> | <%= ({m: '男', f: '女', x: '保密'})[post.author.gender] %>"
+           data-content="<%= post.author.bio %>">
+            <img class="avatar" src="/img/<%= post.author.avatar %>">
+        </a>
+        <span><%= post.author.name %> | <%= ({m: '男', f: '女', x: '保密'})[post.author.gender] %></span>
+    </div>
+    <div class="article-relative">
+        <h3 class="article-title"><a href="/posts/<%= post._id %>?simple"><%= post.title %></a>
+            <% if (user && post.author._id && user._id.toString() === post.author._id.toString()) { %>
+            <div style="float: right">
+                    <span class="item cont"><a href="/posts/<%= post._id %>/edit">编辑</a></span>
+                    <span class="item cont"><a href="/posts/<%= post._id %>/remove">删除</a></span>
+            </div>
+            <% } %>
+        </h3>
+        <pre class="article-content simple"><%- post.content %></pre>
+        <pre class="article-content simpleOne"><%- post.content %></pre>
+        <div class="article-write">
+            <span class="tag"><%= post.created_at %></span>
+            <span class="tag right">
+                <span>浏览(<%= post.pv %>)</span>
+                <span>留言(<%= post.commentsCount %>)</span>
+
+            </span>
+        </div>
+    </div>
+
+    <div class="clearfix visible-xs"></div>
+</div>

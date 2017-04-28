@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="format-detection" content="telephone=no">
+    <title>我的</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <script src="/js/screen.js"></script>
+    <script src="/js/iscroll.js"></script>
+    <style>
+        body,table,tr,th,td,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,select,fieldset,input,textarea,p,span,img,a,em,i{margin:0; padding:0;outline: 0; }
+        body{
+            font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+            color: #404040;
+            background-color: #fff;
+        }
+        a{color:#222; text-decoration:none; outline:none;}
+        i{font-style: normal;}
+        a:hover{ text-decoration:none;}
+        em{font-style: normal;}
+        li{list-style: none}
+        img{border:0 none;}
+        img,input,select,textarea,label{vertical-align:middle;}
+        .about{
+            text-align: center;
+        }
+        .about-top>img:nth-child(1){
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+            margin: 2rem 0 1rem;
+        }
+        .about-top{
+            background-color: #fff;
+        }
+        .about-img{
+            width: 100%;
+        }
+        .brief{
+            margin: 0.5rem 0 1rem;
+        }
+        .about-public{
+            height: 2.75rem;
+            line-height: 2.75rem;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            padding: 0 0.9375rem;
+            text-align: left;
+            background-color: #fff;
+            margin-top: 2rem;
+        }
+        .information{
+            margin: 2rem 0 1rem;
+        }
+        .about-public img{
+            height: 1.8rem;
+            margin-right: 0.625rem;
+        }
+        .enter{
+            margin-top: 1rem;
+            width: 100%;
+            text-align: center;
+            color: #FF7272;
+            padding: 0;
+        }
+        .white_content {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            bottom: 0;
+            background: #000;
+            opacity: .5;
+            z-index: 1;
+            left: 0;
+        }
+        .introduction{
+            z-index: 2;
+            width: 80%;
+            background-color: #f9f9f9;
+            position: fixed;
+            top: 15rem;
+            left: 10%;
+            border-radius: 5px;
+        }
+        .introduction textarea{
+            resize : none;
+            width: 80%;
+            border: 1px solid #ccc;
+            margin: 0.9375rem 0;
+            padding: 0.625rem;
+        }
+        .go-intro{
+            background-color: #fff;
+            padding: 0.2rem 0.625rem;
+            border: 1px solid #ccc;
+            margin-bottom: 0.9375rem;
+            font-size: 0.9375rem;
+            color: #FF7272;
+        }
+    </style>
+</head>
+<body>
+<div class="about" id="about">
+    <div class="about-top">
+        <% if (post) { %>
+        <img src="/img/<%= post.avatar %>">
+        <% } %>
+        <% if (!post) { %>
+        <img src="/img/news.jpeg" alt=""/>
+        <% } %>
+        <% if (post) { %>
+        <p><%= post.name %></p>
+        <% } %>
+        <% if (post&&( !post.bio || post.bio=='')) { %>
+        <p class="brief" @click="showAdd">还咩有简介,去添加</p>
+        <% } %>
+        <% if (post&&(post.bio || post.bio!='')) { %>
+        <p  @click="showAdd"><%= post.bio %></p>
+        <% } %>
+        <img class="about-img" src="/img/about1.png" alt=""/>
+    </div>
+    <% if (post) { %>
+    <a class="item" href="/posts?author=<%= user._id %>">
+        <div class="about-public">
+            <img src="/img/article.png" alt=""/>
+                <span>个人主页</span>
+        </div>
+    </a>
+    <% } %>
+    <% if (!post) { %>
+    <div class="about-public">
+        <img src="/img/article.png" alt=""/>
+        <span>我的文章</span>
+    </div>
+    <% } %>
+    <% if (post) { %>
+    <a class="item" href="/signout">
+        <p class="about-public enter">登出</p>
+    </a>
+    <% } %>
+    <% if (!post) { %>
+    <a class="item" href="/signin">
+        <p class="about-public enter">登录</p>
+    </a>
+    <a class="item" href="/signup">
+        <p class="about-public enter">注册</p>
+    </a>
+    <% } %>
+    <div id="light" class="white_content" v-if="showLight"></div>
+    <form class="introduction" method="post" enctype="multipart/form-data" v-if="showIntro">
+        <div class="field required">
+            <textarea name="bio" rows="3" v-model="user.bio"></textarea>
+        </div>
+        <input class="go-intro" value="确定" type="submit"/>
+    </form>
+    <%- include('components/bottom') %>
+</div>
+<script src="//cdn.bootcss.com/vue/1.0.24/vue.min.js"></script>
+<script src="//cdn.bootcss.com/vue-resource/0.7.2/vue-resource.min.js"></script>
+<script>
+    var vm = new Vue({
+        el:'body',
+        data: {
+            showLight:false,
+            showIntro:false
+        },
+        ready: function() {
+            var that = this;
+        },
+        methods:{
+            showAdd: function () {
+                this.showLight = true;
+                this.showIntro = true
+            }
+        }
+    });
+</script>
+</body>
+</html>

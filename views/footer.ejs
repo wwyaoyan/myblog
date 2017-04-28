@@ -1,0 +1,41 @@
+<!--<script type="text/javascript">
+    // 点击按钮弹出下拉框
+    $('navbar-toggle').dropdown();
+    // 鼠标悬浮在头像上，弹出气泡提示框
+    $('.post-content .avatar').popup({
+        inline: true,
+        position: 'bottom right',
+        lastResort: 'bottom right',
+    });
+</script>
+</body>
+</html>-->
+
+
+
+<script type="text/javascript">
+    // 点击按钮弹出下拉框
+    $('.ui.dropdown').dropdown();
+    // 鼠标悬浮在头像上，弹出气泡提示框
+    $('.post-content .avatar').popup({
+        inline: true,
+        position: 'bottom right',
+        lastResort: 'bottom right',
+    });
+    var simple = document.getElementsByClassName('simple');
+    var simpleOne = document.getElementsByClassName('simpleOne');
+    if(location.href.substring(location.href.indexOf("?")+1)=='simple'){
+        console.log(11)
+        for(var i=0; i<simple.length; i++){
+            simple[i].style.display = 'none';
+            simpleOne[i].style.display = 'block'
+        }
+    }else{
+        for(var i=0; i<simple.length; i++){
+            simple[i].style.display = 'block';
+            simpleOne[i].style.display = 'none'
+        }
+    }
+</script>
+</body>
+</html>

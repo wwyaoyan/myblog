@@ -1,0 +1,50 @@
+<div class="container" style="padding:0">
+    <h3 class="ui dividing header comment-title">留言</h3>
+    <div class="row" >
+        <div class="col-xs-1 col-sm-1">
+        </div>
+        <div class="col-xs-10 col-sm-10 comments">
+
+            <% comments.forEach(function (comment) { %>
+            <div class="comment">
+                <span class="avatar comment-left">
+                    <img src="/img/<%= comment.author.avatar %>">
+                    <div class="author-content">
+                        <a class="author" href="/posts?author=<%= comment.author._id %>"><%= comment.author.name %></a>
+                        <div class="metadata">
+                            <span class="date"><%= comment.created_at %></span>
+                        </div>
+                    </div>
+                </span>
+                <div class="content">
+                    <!--<a class="author" href="/posts?author=<%= comment.author._id %>"><%= comment.author.name %></a>
+                    <div class="metadata">
+                        <span class="date"><%= comment.created_at %></span>
+                    </div>-->
+                    <div class="text"><%- comment.content %></div>
+
+                    <% if (user && comment.author._id && user._id.toString() === comment.author._id.toString()) { %>
+                    <div class="actions">
+                        <a class="reply" href="/posts/<%= post._id %>/comment/<%= comment._id %>/remove">删除</a>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+            <% }) %>
+
+            <% if (user) { %>
+            <form class="ui reply form" method="post" style="margin-top: 3rem" action="/posts/<%= post._id %>/comment">
+                <div class="field">
+                    <textarea name="content" style="height: 2.6rem;min-height: initial;float: left;width: 75%"></textarea>
+                    <input type="submit" class="ui icon button" value="留言" style="float: right" />
+                </div>
+            </form>
+            <% } %>
+
+        </div>
+        <div class="col-xs-1 col-sm-1">
+        </div>
+
+        <div class="clearfix visible-xs"></div>
+    </div>
+</div>
